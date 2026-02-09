@@ -1,7 +1,9 @@
 #include "Player/TH_Character.h"
 
 #include "Item/Gun/TH_GunBase.h"
+#include "Item/Gun/TH_Rifle.h"
 #include "EnhancedInputComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 ATH_Character::ATH_Character()
 {
@@ -69,5 +71,11 @@ void ATH_Character::PullTrigger()
 	if (CurrentWeapon)
 	{
 		CurrentWeapon->Fire();
+	}
+	Rifle = Cast<ATH_Rifle>(UGameplayStatics::GetActorOfClass(GetWorld(), ATH_Rifle::StaticClass()));
+	if (Rifle)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Rifle is %s"), Rifle ? TEXT("Valid") : TEXT("Null"));
+		Rifle->RifleEffect();
 	}
 }

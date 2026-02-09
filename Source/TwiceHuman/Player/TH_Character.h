@@ -4,6 +4,7 @@
 #include "GameFramework/Character.h"
 #include "TH_Character.generated.h"
 
+class ATH_Rifle;
 class ATH_GunBase;
 class UInputAction;
 
@@ -20,6 +21,9 @@ public:
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	UInputAction* FireAction;
+	
+	UPROPERTY()
+	ATH_Rifle* Rifle;
 
 protected:
 	virtual void BeginPlay() override;
