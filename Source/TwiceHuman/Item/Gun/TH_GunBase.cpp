@@ -1,9 +1,12 @@
 #include "Item/Gun/TH_GunBase.h"
 
+#include "Kismet/GameplayStatics.h"
+#include "Monster/TH_MonsterBase.h"
+
 ATH_GunBase::ATH_GunBase()
 {
 	PrimaryActorTick.bCanEverTick = false;
-	
+
 	GunMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("GunMesh"));
 	GunMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	RootComponent = GunMesh;
@@ -52,8 +55,18 @@ void ATH_GunBase::Fire()
 	if (GEngine)
 	{
 		const FString Msg = bHit && Hit.GetActor()
-								? FString::Printf(TEXT("Hit: %s"), *Hit.GetActor()->GetName())
-								: TEXT("No Hit");
+			                    ? FString::Printf(TEXT("Hit: %s"), *Hit.GetActor()->GetName())
+			                    : TEXT("No Hit");
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, Msg);
+	}
+
+	if (bHit)
+	{
+		AActor* HitActor = Hit.GetActor();
+		if (ATH_MonsterBase* MonsterBase = Cast<ATH_MonsterBase>(HitActor))
+		{
+			UGameplayStatics::ApplyDamage(MonsterBase, BulletDamage, OwnerController, this, UDamageType::StaticClass());
+			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactBulletEffect, Hit.ImpactPoint);
+		}
 	}
 }

@@ -30,6 +30,12 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Debug")
 	bool bDrawDebug = true;
+	
+	UPROPERTY(EditAnywhere)
+	float BulletDamage = 10.0f;	
+	
+	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess), Category = "WeaponEffect")
+	UParticleSystem* ImpactBulletEffect;
 
 public:
 	UFUNCTION()
