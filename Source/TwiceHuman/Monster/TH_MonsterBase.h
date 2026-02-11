@@ -4,6 +4,9 @@
 #include "GameFramework/Character.h"
 #include "TH_MonsterBase.generated.h"
 
+class UMonsterStatComponent;
+class UTakenDamageComponent;
+
 UCLASS()
 class TWICEHUMAN_API ATH_MonsterBase : public ACharacter
 {
@@ -20,16 +23,10 @@ public:
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
-private:
+protected:
 	UPROPERTY()
-	float MaxHP = 100.0f;
-	UPROPERTY()
-	float CurrentHP = 0.0f;
+	UTakenDamageComponent* DamageComponent;
 	
 	UPROPERTY()
-	bool bIsAlive = true;
-	
-	UFUNCTION()
-	void TakenDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController*
-					   InstigatedBy, AActor* DamageCauser);
+	UMonsterStatComponent* MonsterStat;
 };

@@ -1,16 +1,20 @@
 #include "Monster/TH_MonsterBase.h"
 
+#include "Date/MonsterStatComponent.h"
+#include "Date/TakenDamageComponent.h"
+#include "EntitySystem/MovieSceneEntitySystemRunner.h"
+
 ATH_MonsterBase::ATH_MonsterBase()
 {
 	PrimaryActorTick.bCanEverTick = false;
+
+	MonsterStat = CreateDefaultSubobject<UMonsterStatComponent>(TEXT("MonsterStat"));
+	DamageComponent = CreateDefaultSubobject<UTakenDamageComponent>(TEXT("DamageComponent"));
 }
 
 void ATH_MonsterBase::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	OnTakeAnyDamage.AddDynamic(this, &ATH_MonsterBase::TakenDamage);
-	CurrentHP = MaxHP;
 }
 
 void ATH_MonsterBase::Tick(float DeltaTime)
@@ -22,14 +26,3 @@ void ATH_MonsterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
-
-void ATH_MonsterBase::TakenDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType,
-	AController* InstigatedBy, AActor* DamageCauser)
-{
-	CurrentHP -= Damage;
-	if (CurrentHP <= 0)
-	{
-		Destroy();
-	}
-}
-
