@@ -29,4 +29,5 @@ protected:
 	
 	UPROPERTY()
 	UMonsterStatComponent* MonsterStat;
+	
 };

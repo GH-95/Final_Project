@@ -8,4 +8,5 @@ UCLASS()
 class TWICEHUMAN_API ATH_Whisper : public ATH_MonsterBase
 {
 	GENERATED_BODY()
+	
 };

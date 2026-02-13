@@ -2,7 +2,6 @@
 
 #include "Date/MonsterStatComponent.h"
 #include "Date/TakenDamageComponent.h"
-#include "EntitySystem/MovieSceneEntitySystemRunner.h"
 
 ATH_MonsterBase::ATH_MonsterBase()
 {
