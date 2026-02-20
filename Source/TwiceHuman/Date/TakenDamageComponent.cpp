@@ -1,6 +1,7 @@
 #include "Date/TakenDamageComponent.h"
 #include "Date/MonsterStatComponent.h"
 #include "Monster/TH_MonsterBase.h"
+#include "Player/TH_Character.h"
 
 UTakenDamageComponent::UTakenDamageComponent()
 {
@@ -18,6 +19,7 @@ void UTakenDamageComponent::BeginPlay()
 
 	MonsterStat = GetOwner()->FindComponentByClass<UMonsterStatComponent>();
 	MonsterBase = Cast<ATH_MonsterBase>(GetOwner());
+	Player = Cast<ATH_Character>(GetOwner());
 }
 
 
@@ -41,5 +43,11 @@ void UTakenDamageComponent::TakenDamage(AActor* DamagedActor, float Damage, cons
 			MonsterBase->Destroy();
 			UE_LOG(LogTemp, Error, TEXT("State changed to Dead: %hhd"), MonsterStat->CurrentState);
 		}
+	}
+
+	if (Player)
+	{
+		Player->CurrentHP -= Damage;
+		UE_LOG(LogTemp, Error, TEXT("Player HP : %f"), Player->CurrentHP);
 	}
 }

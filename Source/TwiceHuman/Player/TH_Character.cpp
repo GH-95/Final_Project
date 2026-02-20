@@ -3,11 +3,14 @@
 #include "Item/Gun/TH_GunBase.h"
 #include "Item/Gun/TH_Rifle.h"
 #include "EnhancedInputComponent.h"
+#include "Date/TakenDamageComponent.h"
 #include "Kismet/GameplayStatics.h"
 
 ATH_Character::ATH_Character()
 {
 	PrimaryActorTick.bCanEverTick = false;
+	
+	DamageComponent = CreateDefaultSubobject<UTakenDamageComponent>(TEXT("DamageComponent"));
 }
 
 void ATH_Character::BeginPlay()

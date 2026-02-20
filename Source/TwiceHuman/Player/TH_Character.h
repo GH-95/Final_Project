@@ -4,6 +4,7 @@
 #include "GameFramework/Character.h"
 #include "TH_Character.generated.h"
 
+class UTakenDamageComponent;
 class ATH_Rifle;
 class ATH_GunBase;
 class UInputAction;
@@ -24,6 +25,13 @@ public:
 	
 	UPROPERTY()
 	ATH_Rifle* Rifle;
+	
+public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "State")
+	float CurrentHP = 0.0f;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "State")
+	float MaxHP = 100.0f;
 
 protected:
 	virtual void BeginPlay() override;
@@ -39,4 +47,8 @@ public:
 	
 	UFUNCTION()
 	void PullTrigger();
+	
+protected:
+	UPROPERTY()
+	UTakenDamageComponent* DamageComponent;
 };

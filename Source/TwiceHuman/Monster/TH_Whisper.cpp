@@ -1,6 +1,8 @@
 #include "Monster/TH_Whisper.h"
 
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Player/TH_Character.h"
 
 void ATH_Whisper::PunchAttack()
 {
@@ -16,8 +18,12 @@ void ATH_Whisper::PunchAttack()
 	                                        bIsDrawDebug ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None, Hit,
 	                                        true, FLinearColor::Red, FLinearColor::Green, 3.0f);
 
-	// if (Hit.bBlockingHit)
-	// {
-	// 	
-	// }
+	if (Hit.bBlockingHit)
+	{
+		AActor* HitActor = Hit.GetActor();
+		if (ATH_Character* Player = Cast<ATH_Character>(HitActor))
+		{
+			UGameplayStatics::ApplyDamage(Player, PunchDamage, AIController, this, UDamageType::StaticClass());
+		}
+	}
 }
