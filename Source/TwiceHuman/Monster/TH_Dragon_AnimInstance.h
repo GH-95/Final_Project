@@ -18,9 +18,17 @@ public:
 	UPROPERTY(Transient)
 	UParticleSystemComponent* FlameParticleComponent;
 	
+	FTimerHandle ProjectileTimer;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Projectile")
+	TSubclassOf<AActor> ProjectileClass;
+	
 	UFUNCTION()
 	void AnimNotify_StartFlame();
 	
 	UFUNCTION()
 	void AnimNotify_EndFlame();
+	
+	UFUNCTION()
+	void SpawnProjectile();
 };

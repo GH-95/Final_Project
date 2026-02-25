@@ -16,6 +16,8 @@ ATH_Character::ATH_Character()
 void ATH_Character::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	CurrentHP = MaxHP;
 }
 
 void ATH_Character::Tick(float DeltaTime)

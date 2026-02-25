@@ -45,9 +45,14 @@ void UTakenDamageComponent::TakenDamage(AActor* DamagedActor, float Damage, cons
 		}
 	}
 
-	if (Player)
+	if (Player && Player->CurrentHP > 0)
 	{
 		Player->CurrentHP -= Damage;
 		UE_LOG(LogTemp, Error, TEXT("Player HP : %f"), Player->CurrentHP);
+		
+		if (Player->CurrentHP <= 0)
+		{
+			Player->Destroy();
+		}
 	}
 }

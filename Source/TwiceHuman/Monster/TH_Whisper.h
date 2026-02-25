@@ -15,7 +15,7 @@ public:
 	UPROPERTY()
 	AController* AIController;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Punch")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PunchAttack")
 	float PunchDamage = 10.0f;
 
 private:

@@ -27,10 +27,10 @@ public:
 	ATH_Rifle* Rifle;
 	
 public:
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "State")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "State")
 	float CurrentHP = 0.0f;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "State")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "State")
 	float MaxHP = 100.0f;
 
 protected:
